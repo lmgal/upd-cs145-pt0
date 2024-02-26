@@ -16,8 +16,6 @@ def sender(channel: Channel, sentence: str) -> None:
     for bit in bin(len(words) - 3)[2:].zfill(2):
         channel.send(int(bit))
 
-    print('Word count sent', len(words), file=stderr)
-
     with open('corpus.txt', 'r') as file:
         corpus = file.read().splitlines()
     
@@ -37,7 +35,6 @@ def receiver(channel: Channel) -> str:
 
     # Get word count
     word_count = channel.get() * 2 + channel.get() + 3
-    print('Word count received', word_count, file=stderr)
 
     # Load corpus
     corpus = []
